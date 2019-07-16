@@ -1,9 +1,15 @@
 pipeline {
     agent {
-        docker {
-            image 'node:lts'
-            args '-p 3000:3000'
+      kubernetes {
+        //cloud 'kubernetes'
+        containerTemplate {
+          name 'maven'
+          image 'node:lts'
+          args '-p 3000:3000'
+          ttyEnabled true
+          command 'cat'
         }
+      }
     }
     environment {
         CI = 'true'
@@ -12,7 +18,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "npm install -g yarn"
+                sh "npm "
                 sh 'yarn'
             }
         }
