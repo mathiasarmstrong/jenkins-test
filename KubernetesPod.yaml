@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  name: jenkins
   labels:
-    some-label: jenkins-test
+    app: jenkins
 spec:
   containers:
   - name: node
