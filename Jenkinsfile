@@ -2,34 +2,29 @@ pipeline {
     agent {
       kubernetes {
         defaultContainer 'jnlp'
-        label 'kube-label'
-        yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jenkins-node
-    image: node
-    command:
-    - cat
-    tty: true
-
-'''
+        yamlFile 'KubernetesPod.yaml'
       }
+    }
+    environment {
+        CI = 'true'
+        ENV = 'test'
     }
     stages {
         stage('Build') {
             steps {
-              sh 'echo hello'
+              container("node"){
+                sh 'npm install -g yarn'
+                sh 'yarn'
+              }
             }
         }
-        // stage('Test') {
-        //     steps {
-        //       container("jenkins-node"){
-        //         sh 'yarn test'
-        //       }
-        //     }
-        // }
+        stage('Test') {
+            steps {
+              container("node"){  
+                sh 'yarn test'
+              }
+            }
+        }
         // stage('Deliver') {
         //     steps {
         //         sh './jenkins/scripts/deliver.sh'
