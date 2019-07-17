@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              container("node"){
+              container("jenkins-node"){
                 sh 'npm install -g yarn'
                 sh 'yarn'
               }
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-              container("node"){
+              container("jenkins-node"){
                 sh 'yarn test'
               }
             }
