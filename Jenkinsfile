@@ -1,12 +1,21 @@
 pipeline {
     agent {
       kubernetes {
-        containerTemplate {
-          label "mytest"
-          name 'node'
-          image 'node:lts'
-          ttyEnabled true
-        }
+        defaultContainer 'jnlp'
+        yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: node
+    image: node:lts
+    command:
+    - npm install -g yarn
+    tty: true
+"""
       }
     }
     environment {
@@ -16,7 +25,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "npm install -g yarn"
                 sh 'yarn'
             }
         }
