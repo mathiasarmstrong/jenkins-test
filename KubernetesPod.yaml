@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: jenkins-test
+spec:
+  containers:
+  - name: node
+    image: node:lts
+    command:
+    - cat
+    tty: true
