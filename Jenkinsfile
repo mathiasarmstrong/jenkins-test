@@ -2,13 +2,8 @@ pipeline {
     agent {
       kubernetes {
         defaultContainer 'jnlp'
-        label "jenkins-test"
         yamlFile 'KubernetesPod.yaml'
       }
-    }
-    environment {
-        CI = 'true'
-        ENV = 'test'
     }
     stages {
         stage('Build') {
