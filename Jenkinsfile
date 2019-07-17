@@ -4,7 +4,6 @@ pipeline {
         containerTemplate {
           name 'node'
           image 'node:lts'
-          args '-p 3000:3000'
           ttyEnabled true
           command 'cat'
         }
