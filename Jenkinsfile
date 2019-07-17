@@ -9,7 +9,7 @@ kind: Pod
 spec:
   containers:
   - name: jenkins-node
-    image: node:lts
+    image: node
     command:
     - cat
     tty: true
