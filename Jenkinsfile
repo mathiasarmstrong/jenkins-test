@@ -2,20 +2,7 @@ pipeline {
     agent {
       kubernetes {
         defaultContainer 'jnlp'
-        yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    some-label: some-label-value
-spec:
-  containers:
-  - name: node
-    image: node:lts
-    command:
-    - npm install -g yarn
-    tty: true
-"""
+        yamlFile 'KubernetesPod.yaml'
       }
     }
     environment {
@@ -25,12 +12,17 @@ spec:
     stages {
         stage('Build') {
             steps {
+              container("node"){
+                sh 'npm install -g yarn'
                 sh 'yarn'
+              }
             }
         }
         stage('Test') {
             steps {
+              container("node"){
                 sh 'yarn test'
+              }
             }
         }
         // stage('Deliver') {
