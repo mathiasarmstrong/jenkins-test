@@ -2,10 +2,10 @@ pipeline {
     agent {
       kubernetes {
         containerTemplate {
+          label "mytest"
           name 'node'
           image 'node:lts'
           ttyEnabled true
-          command 'cat'
         }
       }
     }
