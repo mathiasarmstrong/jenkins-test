@@ -2,7 +2,19 @@ pipeline {
     agent {
       kubernetes {
         defaultContainer 'jnlp'
-        yamlFile 'KubernetesPod.yaml'
+        label "jenkins-node"
+        yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jenkins-node
+    image: node:lts
+    command:
+    - cat
+    tty: true
+
+'''
       }
     }
     stages {
