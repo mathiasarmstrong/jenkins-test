@@ -1,6 +1,7 @@
 pipeline {
     agent {
       kubernetes {
+        cloud "kubernetes"
         containerTemplate {
           name 'node'
           image 'node:lts'
