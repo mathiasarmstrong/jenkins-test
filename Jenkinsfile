@@ -20,10 +20,7 @@ spec:
     stages {
         stage('Build') {
             steps {
-              container("jenkins-node"){
-                sh 'npm install -g yarn'
-                sh 'yarn'
-              }
+              sh 'echo hello'
             }
         }
         // stage('Test') {
