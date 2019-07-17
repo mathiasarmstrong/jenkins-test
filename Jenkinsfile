@@ -1,7 +1,6 @@
 pipeline {
     agent {
       kubernetes {
-        label "jenkins-test"
         containerTemplate {
           name 'node'
           image 'node:lts'
