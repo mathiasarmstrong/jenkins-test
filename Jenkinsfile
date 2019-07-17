@@ -2,7 +2,7 @@ pipeline {
     agent {
       kubernetes {
         defaultContainer 'jnlp'
-        label "jenkins-node"
+        label "minikube-agent"
         yaml '''
 apiVersion: v1
 kind: Pod
