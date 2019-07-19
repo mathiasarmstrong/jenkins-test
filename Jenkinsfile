@@ -1,13 +1,8 @@
 pipeline {
     agent {
       kubernetes {
-        defaultContainer 'jnlp'
         yamlFile 'KubernetesPod.yaml'
       }
-    }
-    environment {
-        CI = 'true'
-        ENV = 'test'
     }
     stages {
         stage('Build') {
@@ -20,8 +15,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-              container("node"){  
+              container("node"){
                 sh 'yarn test'
+                sh "echo hello"
               }
             }
         }
