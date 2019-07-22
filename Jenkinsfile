@@ -17,7 +17,6 @@ pipeline {
             steps {
               container("node"){
                 sh 'yarn test'
-                sh "echo hello"
               }
             }
         }
